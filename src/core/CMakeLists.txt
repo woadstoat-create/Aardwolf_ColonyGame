@@ -2,6 +2,8 @@ add_library(
     AardwolfCore
     STATIC
         src/BuildInfo.cpp
+        src/world/Chunk.cpp
+        src/world/World.cpp
 )
 
 add_library(Aardwolf::Core ALIAS AardwolfCore)
@@ -28,4 +30,4 @@ target_compile_definitions(
         AARDWOLF_VERSION_PATCH=${PROJECT_VERSION_PATCH}
 )
 
-colony_configure_target(AardwolfCore)
+aardwolf_configure_target(AardwolfCore)
