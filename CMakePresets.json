@@ -1,0 +1,123 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 28,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "windows-ninja-base",
+            "hidden": true,
+            "generator": "Ninja",
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "toolset": {
+                "value": "host=x64",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "BUILD_SHARED_LIBS": "OFF",
+                "BUILD_TESTING": "ON",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        },
+        {
+            "name": "dev",
+            "displayName": "Developer Debug",
+            "description": "MSVC, Ninja, debug information and tests",
+            "inherits": "windows-ninja-base",
+            "binaryDir": "${sourceDir}/build/dev",
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "COLONY_WARNINGS_AS_ERRORS": "OFF",
+                "COLONY_ENABLE_CLANG_TIDY": "OFF"
+            }
+        },
+        {
+            "name": "release",
+            "displayName": "Developer Release",
+            "description": "MSVC, Ninja, optimised release build and tests",
+            "inherits": "windows-ninja-base",
+            "binaryDir": "${sourceDir}/build/release",
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "COLONY_WARNINGS_AS_ERRORS": "OFF",
+                "COLONY_ENABLE_CLANG_TIDY": "OFF"
+            }
+        },
+        {
+            "name": "ci",
+            "displayName": "Continuous Integration",
+            "description": "Portable CI configuration using the platform default generator",
+            "binaryDir": "${sourceDir}/build/ci",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "BUILD_SHARED_LIBS": "OFF",
+                "BUILD_TESTING": "ON",
+                "COLONY_WARNINGS_AS_ERRORS": "ON",
+                "COLONY_ENABLE_CLANG_TIDY": "OFF"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "dev",
+            "configurePreset": "dev"
+        },
+        {
+            "name": "release",
+            "configurePreset": "release"
+        },
+        {
+            "name": "ci",
+            "configurePreset": "ci",
+            "configuration": "Release"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "dev",
+            "configurePreset": "dev",
+            "output": {
+                "outputOnFailure": true
+            },
+            "execution": {
+                "noTestsAction": "error"
+            }
+        },
+        {
+            "name": "release",
+            "configurePreset": "release",
+            "output": {
+                "outputOnFailure": true
+            },
+            "execution": {
+                "noTestsAction": "error"
+            }
+        },
+        {
+            "name": "ci",
+            "configurePreset": "ci",
+            "configuration": "Release",
+            "output": {
+                "outputOnFailure": true
+            },
+            "execution": {
+                "noTestsAction": "error"
+            }
+        }
+    ]
+}

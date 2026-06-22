@@ -1,0 +1,43 @@
+# CMake output
+build/
+out/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+compile_commands.json
+
+# Local CMake settings
+CMakeUserPresets.json
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# JetBrains
+.idea/
+
+# Compiler output
+*.obj
+*.o
+*.pdb
+*.ilk
+*.lib
+*.a
+*.dll
+*.so
+*.dylib
+*.exe
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log

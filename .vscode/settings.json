@@ -1,0 +1,12 @@
+{
+    "cmake.useCMakePresets": "always",
+    "cmake.ctest.testExplorerIntegrationEnabled": true,
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "editor.formatOnSave": true,
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    "[cmake]": {
+        "editor.formatOnSave": true
+    }
+}
