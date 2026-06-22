@@ -16,4 +16,4 @@ set_target_properties(
         OUTPUT_NAME "Aardwolf"
 )
 
-colony_configure_target(AardwolfGame)
+aardwolf_configure_target(AardwolfGame)

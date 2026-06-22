@@ -18,7 +18,7 @@ if(COLONY_ENABLE_CLANG_TIDY)
     )
 endif()
 
-function(colony_configure_target target_name)
+function(aardwolf_configure_target target_name)
     target_compile_features(
         ${target_name}
         PRIVATE
@@ -36,6 +36,7 @@ function(colony_configure_target target_name)
             ${target_name}
             PRIVATE
                 /W4
+                /EHsc
                 /permissive-
                 /Zc:preprocessor
                 /Zc:__cplusplus
