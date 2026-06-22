@@ -1,0 +1,56 @@
+name: CI
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+    build-and-test:
+        name: ${{ matrix.name }}
+        runs-on: ${{ matrix.os }}
+
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - name: Windows MSVC
+                      os: windows-latest
+                    - name: Ubuntu GCC
+                      os: ubuntu-latest
+
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v6
+
+            - name: Install SFML Linux dependencies
+              if: runner.os == 'Linux'
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y \
+                      libxrandr-dev \
+                      libxcursor-dev \
+                      libxi-dev \
+                      libudev-dev \
+                      libflac-dev \
+                      libvorbis-dev \
+                      libgl1-mesa-dev \
+                      libegl1-mesa-dev \
+                      libfreetype-dev \
+                      libharfbuzz-dev \
+                      libmbedtls-dev \
+                      libssh2-1-dev
+
+            - name: Configure
+              run: cmake --preset ci
+
+            - name: Build
+              run: cmake --build --preset ci --parallel
+
+            - name: Test
+              run: ctest --preset ci
