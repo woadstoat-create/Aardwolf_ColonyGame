@@ -1,4 +1,4 @@
-#include <aardwolf/core/BuildInfo.hpp>>
+#include <aardwolf/core/BuildInfo.hpp>
 
 namespace aardwolf::core
 {
